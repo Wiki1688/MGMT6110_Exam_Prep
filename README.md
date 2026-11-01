@@ -1,0 +1,2 @@
+# MGMT6110_Exam_Prep
+MGMT6110_Exam_Preparation Slides
