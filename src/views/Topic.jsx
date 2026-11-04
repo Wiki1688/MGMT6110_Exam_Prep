@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import Slide from '../components/Slide.jsx';
+import Slide, { SlideNotes } from '../components/Slide.jsx';
+import { useMedia, Q_SPLIT } from '../lib/useMedia.js';
 import { Star, Check, ChevronLeft, ChevronRight, Grid } from '../components/Icons.jsx';
-import { topicStats } from '../lib/store.js';
+import { topicStats, isOn } from '../lib/store.js';
 
 export default function Topic({ content, topicId, slideIndex, store, actions, navigate }) {
   const topics = content.topics;
   const ti = topics.findIndex((t) => t.id === topicId);
   const topic = topics[ti];
   const [showGrid, setShowGrid] = useState(false);
+  const split = useMedia(Q_SPLIT); // unfolded inner screen: slide left, notes right
   const [anim, setAnim] = useState('');
   const touch = useRef(null);
 
@@ -70,8 +72,8 @@ export default function Topic({ content, topicId, slideIndex, store, actions, na
   };
 
   const stats = topicStats(topic, store);
-  const isMarked = !!store.bookmarks[slide.id];
-  const isMastered = !!store.mastered[slide.id];
+  const isMarked = !!isOn(store.bookmarks, slide.id);
+  const isMastered = !!isOn(store.mastered, slide.id);
 
   return (
     <div className="page topic" style={{ '--topic': topic.color }}>
@@ -95,9 +97,9 @@ export default function Topic({ content, topicId, slideIndex, store, actions, na
                   <span className="n">{i + 1}</span>
                   <span className="t">{s.title}</span>
                   <span className="flags">
-                    {store.mastered[s.id] && <Check width={18} height={18} />}
-                    {store.bookmarks[s.id] && <Star filled width={18} height={18} />}
-                    {store.seen[s.id] && !store.mastered[s.id] && <i className="dot" />}
+                    {isOn(store.mastered, s.id) && <Check width={18} height={18} />}
+                    {isOn(store.bookmarks, s.id) && <Star filled width={18} height={18} />}
+                    {store.seen[s.id] && !isOn(store.mastered, s.id) && <i className="dot" />}
                   </span>
                 </button>
               </li>
@@ -105,12 +107,38 @@ export default function Topic({ content, topicId, slideIndex, store, actions, na
           </ol>
         </div>
       ) : (
-        <div className="reader" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-          <div className="tap-zone left" onClick={prev} aria-hidden />
-          <div className="tap-zone right" onClick={next} aria-hidden />
-          <div key={slide.id} className={`slide-wrap ${anim}`}>
-            <Slide slide={slide} topic={topic} />
+        <div className={`reader-layout${split ? ' split' : ''}`}>
+          <div className="reader" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} data-slide={slide.id} data-index={idx}>
+            <div className="tap-zone left" onClick={prev} aria-hidden />
+            <div className="tap-zone right" onClick={next} aria-hidden />
+            <div key={slide.id} className={`slide-wrap ${anim}`}>
+              <Slide slide={slide} topic={topic} notesAside={split} />
+            </div>
           </div>
+          {split && (
+            <aside className="reader-aside" aria-label="Notes">
+              <SlideNotes slide={slide} />
+              {!slide.memorise && !slide.tip && !slide.trap && <p className="muted aside-empty">No tip or trap on this slide.</p>}
+              <div className="aside-card">
+                <h3><Star filled width={18} height={18} /> Marked in {topic.id} <span className="muted">({stats.bookmarks})</span></h3>
+                {stats.bookmarks === 0 ? <p className="muted">Tap “Mark” to keep a slide here.</p> : (
+                  <ol className="aside-list">
+                    {topic.slides.map((s, i) => isOn(store.bookmarks, s.id) && (
+                      <li key={s.id}><button className={i === idx ? 'current' : ''} onClick={() => goTo(i)}><span className="n">{i + 1}</span> {s.title}</button></li>
+                    ))}
+                  </ol>
+                )}
+              </div>
+              <div className="aside-card">
+                <h3>All slides · {stats.seen}/{total} seen</h3>
+                <ol className="aside-list">
+                  {topic.slides.map((s, i) => (
+                    <li key={s.id}><button className={i === idx ? 'current' : ''} onClick={() => goTo(i, i > idx ? 'next' : 'prev')}><span className="n">{i + 1}</span> {s.title}{isOn(store.mastered, s.id) ? ' ✓' : ''}</button></li>
+                  ))}
+                </ol>
+              </div>
+            </aside>
+          )}
         </div>
       )}
 

@@ -88,7 +88,19 @@ function Mcq({ slide }) {
   );
 }
 
-export default function Slide({ slide, topic }) {
+/** The notes that move to the side panel on the unfolded (two-pane) layout. */
+export function SlideNotes({ slide }) {
+  const kind = slide.kind || 'concept';
+  return (
+    <>
+      {kind !== 'memorise' && slide.memorise && <div className="memorise"><Brain /><div>{slide.memorise}</div></div>}
+      {slide.tip && <div className="callout tip"><Bulb /><div><b>Exam tip</b> {slide.tip}</div></div>}
+      {slide.trap && <div className="callout trap"><Alert /><div><b>Trap</b> {slide.trap}</div></div>}
+    </>
+  );
+}
+
+export default function Slide({ slide, topic, notesAside = false }) {
   const kind = slide.kind || 'concept';
   return (
     <article className={`slide kind-${kind}`} style={{ '--topic': topic.color }}>
@@ -116,12 +128,12 @@ export default function Slide({ slide, topic }) {
           {kind !== 'compare' && slide.table && <Table table={slide.table} />}
           {kind !== 'diagram' && slide.image && <Diagram src={slide.image} alt={slide.title} />}
           {kind === 'exam' && <Mcq slide={slide} />}
-          {slide.memorise && <div className="memorise"><Brain /><div>{slide.memorise}</div></div>}
+          {!notesAside && slide.memorise && <div className="memorise"><Brain /><div>{slide.memorise}</div></div>}
         </>
       )}
 
-      {slide.tip && <div className="callout tip"><Bulb /><div><b>Exam tip</b> {slide.tip}</div></div>}
-      {slide.trap && <div className="callout trap"><Alert /><div><b>Trap</b> {slide.trap}</div></div>}
+      {!notesAside && slide.tip && <div className="callout tip"><Bulb /><div><b>Exam tip</b> {slide.tip}</div></div>}
+      {!notesAside && slide.trap && <div className="callout trap"><Alert /><div><b>Trap</b> {slide.trap}</div></div>}
     </article>
   );
 }

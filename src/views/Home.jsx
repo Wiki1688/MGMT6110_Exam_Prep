@@ -1,10 +1,18 @@
 import React from 'react';
 import ProgressRing from '../components/ProgressRing.jsx';
-import { topicStats } from '../lib/store.js';
-import { EXAMS, daysUntil, daysLabel, formatVisited } from '../lib/dates.js';
-import { Star, Play, Check } from '../components/Icons.jsx';
+import { topicStats, countOn, exportText } from '../lib/store.js';
+import { FINAL, daysUntil, examMessage, formatVisited } from '../lib/dates.js';
+import { Star, Play, Check, Images } from '../components/Icons.jsx';
+import { downloadBackup } from './Settings.jsx';
 
-export default function Home({ content, store, navigate }) {
+const BACKUP_EVERY_MS = 3 * 86400000;
+
+export default function Home({ content, store, actions, navigate }) {
+  const [later, setLater] = React.useState(() => { try { return sessionStorage.getItem('mgmt6110:backupLater') === '1'; } catch { return false; } });
+  const imp = content.important || { groups: [], total: 0 };
+  const impSeen = imp.groups.reduce((n, g) => n + g.slides.filter((s) => store.seen[s.key]).length, 0);
+  const impStarred = countOn(store.bookmarks, 'imp:');
+  const n = daysUntil(FINAL.date);
   const topics = content.topics;
   const totals = topics.reduce((acc, t) => {
     const s = topicStats(t, store);
@@ -25,20 +33,25 @@ export default function Home({ content, store, navigate }) {
         <ProgressRing pct={pct} size={104} sub={`${totals.seen}/${totals.total} seen`} />
       </header>
       <div className="chips">
-        {EXAMS.map((e) => {
-          const n = daysUntil(e.date);
-          return (
-            <span key={e.key} className={`chip ${e.key}`}>
-              <span className="chip-main"><b>{e.label}</b> · {e.when}</span>
-              <em>{daysLabel(n)}</em>
-            </span>
-          );
-        })}
+        <span className={`chip final${n === 0 ? ' exam-day' : ''}`} data-testid="countdown">
+          <span className="chip-main"><b>{FINAL.label}</b> · {FINAL.when}</span>
+          <em>{examMessage(n)}</em>
+        </span>
       </div>
+
+      {totals.seen > 20 && Date.now() - (store.backupAt || 0) > BACKUP_EVERY_MS && !later && (
+        <div className="notice backup" role="status" data-testid="backup-banner">
+          <b>Back up your progress.</b> {store.backupAt ? `Last backup ${formatVisited(store.backupAt)}.` : 'No backup yet.'} One tap saves a small file you can import on any device.
+          <div className="row" style={{ marginTop: 8 }}>
+            <button className="btn primary" onClick={() => { downloadBackup(exportText()); actions.markBackedUp(); }}>Back up now</button>
+            <button className="btn" onClick={() => { try { sessionStorage.setItem('mgmt6110:backupLater', '1'); } catch { /* ignore */ } setLater(true); }}>Later</button>
+          </div>
+        </div>
+      )}
 
       <div className="stats-row">
         <div className="stat"><Check /><span><b>{totals.mastered}</b> mastered</span></div>
-        <div className="stat"><Star filled /><span><b>{totals.bookmarks}</b> marked</span></div>
+        <div className="stat"><Star filled /><span><b data-stat="marked">{totals.bookmarks}</b> marked</span></div>
         <div className="stat"><span><b>{topics.length}</b> topics</span></div>
       </div>
 
@@ -60,6 +73,15 @@ export default function Home({ content, store, navigate }) {
           </div>
         </button>
       )}
+
+      <button className="imp-home" onClick={() => navigate('/important')} data-testid="imp-home">
+        <Images />
+        <div>
+          <div className="resume-label">Important slides</div>
+          <div className="resume-title">{imp.total ? `${imp.total} slides to know cold` : 'Coming soon'}</div>
+          <div className="resume-sub">{imp.total ? `${impSeen}/${imp.total} seen · ${impStarred} starred · pinch to zoom` : 'Added when important.json is published'}</div>
+        </div>
+      </button>
 
       <h2 className="section-title">The course, in order</h2>
       <ol className="topic-grid">

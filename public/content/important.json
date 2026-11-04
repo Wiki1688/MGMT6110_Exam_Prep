@@ -1,0 +1,353 @@
+{
+ "version": "2026-11-04",
+ "note": "Student's selection (Important_Slides_to_Print.pptx) plus ten Week 10 Co-Collaboration Model slides.",
+ "groups": [
+  {
+   "id": "week7-agents",
+   "title": "Week 7 · Building AI Agents I: the model, the loop and the reasoning",
+   "week": "Week 7",
+   "slides": [
+    {
+     "id": "imp-05",
+     "image": "important/imp-05.jpg",
+     "title": "The running map: where each week sits",
+     "remember": [
+      "Prof Roh adds one layer a week so that by Week 10 the map shows 'the whole ecosystem of human-AI collaboration'.",
+      "Centre: THE AGENT = 'Brain · LLM (tokens, context, reasoning)' inside a loop: observe → think → act.",
+      "Left, PEOPLE: 'Requester (asks, and decides what to do)' and 'Human gate (approves anything that acts)'; later Reviewer and Owner.",
+      "Still to come (faded): memory and tools (Week 8); planning and evaluation (Week 9); teams of agents, senses, code (Week 10).",
+      "Right: THE WORLD IT ACTS ON (apps and data via tools and MCP, other agents, senses, code). Bottom: the organisation (IMDA framework)."
+     ],
+     "topic": "T09"
+    }
+   ]
+  },
+  {
+   "id": "week7-map",
+   "title": "Week 7 · The Map of Human-AI Collaboration",
+   "week": "Week 7",
+   "slides": [
+    {
+     "id": "imp-06",
+     "image": "important/imp-06.jpg",
+     "title": "The Map: two questions, four ways to share the work",
+     "remember": [
+      "Two questions place any TASK: 'Does it have a right answer?' (columns) and 'Is it work that people and AI must do together, or that either can do alone?' (rows).",
+      "Top-left 'A person leads, AI inside' · Top-right 'Agents run it, a person judges' (AI agents run the work, a person judges inside).",
+      "Bottom-left 'AI alone, with checks' · Bottom-right 'A person decides, AI alongside'.",
+      "Bottom-right example: 'A consultant advises on a merger; a banker plans a client negotiation with AI drafting options.'",
+      "'Where a task sits tells us who should lead it.' Place a task, never a whole job."
+     ],
+     "topic": "T10"
+    },
+    {
+     "id": "imp-07",
+     "image": "important/imp-07.jpg",
+     "title": "The same map in every function",
+     "remember": [
+      "Every function (bank, tech, insurer, consulting, marketing, product, government) has tasks in all four quadrants.",
+      "Bank: 'AI checks a loan file; a credit officer signs' (person leads) · 'Match incoming payments to invoices' (AI alone, with checks).",
+      "Bank: 'Agents prepare a client review; the banker sets the advice' (agents run it) · 'Plan a hard client negotiation' (person decides).",
+      "Column headers carry both answers, e.g. 'AI alone, with checks' = right answer · either can do alone.",
+      "In essence: 'the question is always about the task in front of you.'"
+     ],
+     "topic": "T10"
+    },
+    {
+     "id": "imp-08",
+     "image": "important/imp-08.jpg",
+     "title": "Place a task: Prof Roh's sixteen placements",
+     "remember": [
+      "A person leads, AI inside: check a loan file, approve a benefit claim, write release notes, translate a product page.",
+      "Agents run it, a person judges: test ad versions, size a market, sort user comments, settle a disputed claim.",
+      "AI alone, with checks: match payments to invoices, check a claim form, reset a password by policy, check a permit form.",
+      "A person decides, AI alongside: advise on a merger, plan a negotiation, write an investor letter, draft a policy.",
+      "Call the quadrant before you click: an exam scenario gives one task and asks for the exact quadrant title."
+     ],
+     "topic": "T10"
+    }
+   ]
+  },
+  {
+   "id": "week8-group4",
+   "title": "Week 8 · Group 4: four PS5 agents, one per quadrant",
+   "week": "Week 8",
+   "slides": [
+    {
+     "id": "imp-09",
+     "image": "important/imp-09.jpg",
+     "title": "Group 4: how our answers placed each agent",
+     "remember": [
+      "Top-left 'A person leads, AI inside': Expense Claim Pre-Check Agent (right answer yes, must work together yes); 'the person signs off what the agent has checked'.",
+      "Top-right 'Agents run it, a person judges': Banking CRM Onboarding Agent (no, yes); the person 'judges options at required checkpoints within the process'.",
+      "Bottom-left 'AI alone, with checks': Daily Manpower Report Agent (yes, no); 'the person spot-checks accuracy on a defined schedule'.",
+      "Bottom-right 'A person decides, AI alongside': Airline Priority Customer Feedback Agent (no, no); the manager 'can decide independently'.",
+      "Across = from verifying the answer to choosing between good options. Down = from needed in every case to spot-checking or deciding independently."
+     ],
+     "topic": "T12"
+    },
+    {
+     "id": "imp-10",
+     "image": "important/imp-10.jpg",
+     "title": "Group 4: what would move each agent?",
+     "remember": [
+      "Expense claims: auto-approve claims under S$20 that pass, finance audits monthly → Question 2 (Must people and AI work together?) yes → no → 'AI alone, with checks'.",
+      "Banking CRM: the agent only suggests; the CRM Manager writes and sends → Question 2 (Must people and AI work together?) yes → no → 'A person decides, AI alongside'.",
+      "Manpower: recommends moving staff on high-absence days; the head decides → Question 1 (Is there a right answer?) yes → no → 'A person decides, AI alongside'.",
+      "Airline feedback: coordinates follow-up with required manager judgments → Question 2 (Must people and AI work together?) no → yes → 'Agents run it, a person judges'.",
+      "One answer flips, the other stays: that is how you explain a move. 'Human accountability is not what places it.'"
+     ],
+     "topic": "T12"
+    }
+   ]
+  },
+  {
+   "id": "week9",
+   "title": "Week 9 · Building AI Agents III: Mapping the Territory",
+   "week": "Week 9",
+   "slides": [
+    {
+     "id": "imp-12",
+     "image": "important/imp-12.jpg",
+     "title": "The agent you know, with its parts set differently",
+     "remember": [
+      "Parts: Clock (starts a run) → Brain (the model, observe · decide · act) · Hands (tools, MCP, skills) · Memory (files between runs) · Human gate (drafts, pull requests).",
+      "Seven families: 1 Answer and research · 2 Browser and computer use · 3 General-purpose · 4 Scheduled and event-driven.",
+      "5 Coding and app building · 6 Inside business software · 7 Builders and frameworks.",
+      "Week 10 question: 'Can we trust it, and who answers for it?'",
+      "Read it as: for each product ask 'which parts it has and how each part is set'."
+     ],
+     "topic": "T13"
+    },
+    {
+     "id": "imp-13",
+     "image": "important/imp-13.jpg",
+     "title": "A model in a loop, inside a harness, with a trigger and a gate",
+     "remember": [
+      "Trigger: 'a person, a clock or an event' → the loop: observe → decide → act → check, around the Model.",
+      "Harness (dashed ring): instructions, tools, memory, control flow, validation, permissions.",
+      "Human gate: 'where a person approves', before, during or after the run.",
+      "Rule: 'Every product in today's lecture fits this drawing. The questions Q1 to Q6 ask how each part is set in a given product.'",
+      "Same model, different harness, different product (the PS7 lesson)."
+     ],
+     "topic": "T13"
+    },
+    {
+     "id": "imp-14",
+     "image": "important/imp-14.jpg",
+     "title": "Workflow or agent: the five-rung ladder",
+     "remember": [
+      "'Who chooses the next step: you, your flowchart or the model?' Each rung up: less chosen by a person, more by the model, fewer people watching.",
+      "Rung 1 a chat answer · Rung 2 a fixed workflow, your Zap · Rung 3 an answer with web search.",
+      "Rung 4 an agent (you start it; the model chooses every turn; you check at prompts and the end).",
+      "Rung 5 an agent that starts itself: a clock or an event starts it, 'the model, unwatched' chooses, you check 'from the run record'.",
+      "Answer: the flowchart chooses in a workflow (your PS5 Zap); the model chooses in an agent."
+     ],
+     "topic": "T13"
+    },
+    {
+     "id": "imp-15",
+     "image": "important/imp-15.jpg",
+     "title": "Agent washing: the three tests",
+     "remember": [
+      "Gartner, June 2025: about 130 of the thousands of agentic AI vendors are real; over 40% of agentic AI projects will be cancelled by the end of 2027.",
+      "Test 1 'Does a model choose the next step?' If no → 'a workflow with an AI step, whose steps a flowchart fixes'.",
+      "Test 2 'Does it use tools to look things up or change things, and read the results?' If no → 'an assistant that writes text for you to use'.",
+      "Test 3 'Does it read the result and decide again?' If no → 'a one-shot automation that acts once and stops'.",
+      "'Agent' is only a label when a product fails any test, most often the first; an agent needs all three parts at once."
+     ],
+     "topic": "T13"
+    },
+    {
+     "id": "imp-16",
+     "image": "important/imp-16.jpg",
+     "title": "Where a product sits: the territory map",
+     "remember": [
+      "Horizontal axis Q1 (Who starts a run?): 'you, each time' on the left → 'a schedule, an event or itself' on the right.",
+      "Vertical axis Q3 (What can it touch?): 'only reads and replies to you' at the bottom → 'changes things beyond its reply' at the top.",
+      "Ask (you start · only reads): family 1 · Delegate (you start · changes things): families 2, 3, 5.",
+      "Monitor (starts without you · only reads): family 4 scheduled watchers · Autopilot (starts without you · changes things): families 4 and 6, e.g. your PS6 watcher.",
+      "Dot size = Q2 (How long does one run go on its own?). Family 7, the builders, makes agents for any region."
+     ],
+     "topic": "T13"
+    },
+    {
+     "id": "imp-17",
+     "image": "important/imp-17.jpg",
+     "title": "When is an agent the wrong tool? (four cheaper exits)",
+     "remember": [
+      "'An agent costs more per run than a script, varies from run to run and needs a gate.'",
+      "1 Do the steps never change? yes → a fixed workflow (the PS5 Zap).",
+      "2 Does a stable API or MCP connector exist? yes → call it rather than click a screen (the LTA bus API, Week 3).",
+      "3 Is an error rare but costly? yes → a person decides, AI alongside · 4 Is the job small and frequent? yes → a formula or a short script.",
+      "All four 'no' → an agent, with a gate. 'An agent pays off only when the next step depends on what the last step found.'"
+     ],
+     "topic": "T13"
+    },
+    {
+     "id": "imp-18",
+     "image": "important/imp-18.jpg",
+     "title": "Checkpoint: can you place a product and judge it?",
+     "remember": [
+      "Checkpoint question 1: a news digest every Monday 8 AM, cannot click, buy or edit → Monitor (starts itself, only reads and reports).",
+      "Checkpoint question 2: a vendor 'agent' follows a fixed flowchart, a model writes the reply text at one step → 'a workflow with an AI step'.",
+      "Checkpoint question 3: Claude Duet is US-only by waitlist → 'Use a family available here, with a gate' (not a VPN, not 'drop the idea').",
+      "Why: a VPN risks the account (terms tie use to supported countries); a scheduled task that drafts for you does much of the job today.",
+      "Exam pattern: one option breaks a rule, one is passive, the right one keeps a gate."
+     ],
+     "topic": "T13"
+    },
+    {
+     "id": "imp-19",
+     "image": "important/imp-19.jpg",
+     "title": "Today's core question, answered",
+     "remember": [
+      "'You can read any product with Q1 to Q6, taken from its settings rather than its name.'",
+      "Q1 (Who starts a run?) · Q2 (How long does one run go on its own?) · Q3 (What can it touch?).",
+      "Q4 (What does it remember?) · Q5 (Where does a person approve?) · Q6 (Where does it run, and where does your data go?).",
+      "The Week 7 map says how closely a person must stay, which sets how far up and right a product may go, and where the gate sits.",
+      "Why: 'every agent product is a model in a loop inside a harness, and the harness settings decide what it can do to your business.'"
+     ],
+     "topic": "T13"
+    }
+   ]
+  },
+  {
+   "id": "week10",
+   "title": "Week 10 — Co-Collaboration Model",
+   "week": "Week 10",
+   "slides": [
+    {
+     "id": "w10-s02",
+     "image": "important/w10-s02.jpg",
+     "title": "After the map: why a new model",
+     "remember": [
+      "'Our map says who leads each task, but it cannot show the joins between tasks and teams.'",
+      "'The row sets how often we check' (shared work throughout; work done alone when the spec is agreed and checked).",
+      "'The column sets what settles a dispute': a test settles work with a right answer; elsewhere teams negotiate and expect false consensus.",
+      "'The third question becomes a name': SPEC.md names who answers for each agent.",
+      "In essence: 'This model checks whether people and agents read a task alike.' Gold rings mark the joins."
+     ],
+     "topic": "T17"
+    },
+    {
+     "id": "w10-s03",
+     "image": "important/w10-s03.jpg",
+     "title": "Co-collaboration: a collaboration between collaborations",
+     "remember": [
+      "Level 1: inside a team (Team A: A1–A4 with agent α; Team B: B1–B4 with agent β). The map says who leads here.",
+      "Level 2: unit works with unit through one SPEC.md; α and β often carry the messages.",
+      "Ten parties: 8 people + 2 agents.",
+      "Every party gives two answers: its own view and its estimate of the other side's view.",
+      "Only at level 2 can an agent misreport its team or two teams read different spec versions."
+     ],
+     "topic": "T17"
+    },
+    {
+     "id": "w10-s04",
+     "image": "important/w10-s04.jpg",
+     "title": "SPEC.md and the agents: one exchange cycle",
+     "remember": [
+      "SPEC.md has numbered clauses, each with an acceptance test; changed only by a pull request both teams approve; every version has a git hash.",
+      "α runs first (7:07 AM) and writes exchange/team-a/findings.json.",
+      "β runs an hour later (8:07 AM), checks with the instructor's validator, rates each finding before reading α's rating, writes feedback.json.",
+      "α's next run accepts or rebuts each point with evidence; only people change the spec.",
+      "'An agent remembers nothing between runs, so the spec is what keeps ten parties pointed at the same work.'"
+     ],
+     "topic": "T17"
+    },
+    {
+     "id": "w10-s06",
+     "image": "important/w10-s06.jpg",
+     "title": "Three measures: the triangle with numbers",
+     "remember": [
+      "Item: finding F7, 'how severe, 0 to 4?'. A's own view 4, A's estimate of B 4; B's own view 2, B's estimate of A 4.",
+      "Agreement |4 − 2| = 2: one score for the pair, from both own views.",
+      "Congruency A |4 − 4| = 0 · B |2 − 4| = 2: inside each person (own view vs own estimate).",
+      "Accuracy A→B |4 − 2| = 2 · B→A |4 − 4| = 0: one each way (estimate vs the other's actual view).",
+      "'What does F7 mean?' → understanding; 'How severe is F7?' → agreement. The A–B line is 'attraction' (trust if one side is an agent)."
+     ],
+     "topic": "T17"
+    },
+    {
+     "id": "w10-s07",
+     "image": "important/w10-s07.jpg",
+     "title": "Notation, the identity and the exact rule",
+     "remember": [
+      "AGR = |o_i − o_k| · CON_i = |o_i − ô_i→k| · ACC_i = |ô_i→k − o_k|. The arrow points from the guesser to the one being guessed.",
+      "c = the cut-off, 1.0 by default: 'a D-score of c or less counts as a match, ties included'.",
+      "Identity: 'On one item, the largest of the three equals the sum of the other two.'",
+      "Same view: a side is correct if CON ≤ c and ACC ≤ c; wrong if both exceed c. Different views: correct if CON > c and ACC ≤ c; wrong if CON ≤ c and ACC > c.",
+      "'Any other mix is indeterminate, for the side and for the pair, and is never forced into a state.'"
+     ],
+     "topic": "T17"
+    },
+    {
+     "id": "w10-s08",
+     "image": "important/w10-s08.jpg",
+     "title": "Four states: crossing agreement with perceived agreement",
+     "remember": [
+      "Columns: 'Both see where they stand' | 'One or both misread it'. Rows: 'They agree' | 'They disagree'.",
+      "Consensus (top-left) · False conflict (top-right) · Dissensus (bottom-left) · False consensus (bottom-right).",
+      "False consensus: 'They disagree, but one or both believe they agree. The difference stays hidden, so nobody works on it.'",
+      "Group names: monolithic consensus · pluralistic ignorance (= false conflict) · dissensus · false consensus.",
+      "Watch: this pair state is not the psychology 'false consensus effect' (one person overestimating how many share their view)."
+     ],
+     "topic": "T17"
+    },
+    {
+     "id": "w10-s09",
+     "image": "important/w10-s09.jpg",
+     "title": "The schematic: two teams, two agents, one SPEC.md",
+     "remember": [
+      "SPEC.md is the X: 16 items, x1 to x16; a change = pull request + an approver from each team.",
+      "Each agent is a Claude routine sampled in 10 to 20 blind runs, so its view is a spread of answers.",
+      "The instructor's answer key and validator, frozen before T0, show who is right, which agreement alone cannot show.",
+      "Colours: green consensus · grey dissensus · red false consensus · amber false conflict · crossed chip shared error · hatched indeterminate.",
+      "Repair: showing the red item to both teams may lead to SPEC.md v2 and consensus by T2 ('still to be tested'; 'has not been piloted')."
+     ],
+     "topic": "T17"
+    },
+    {
+     "id": "w10-s14",
+     "image": "important/w10-s14.jpg",
+     "title": "Sorting one item: three questions, then a state",
+     "remember": [
+      "1 Do they agree? (own views, D ≤ c) · 2 Does j expect it? (congruency, D ≤ c) · 3 Is j accurate? (accuracy, D ≤ c).",
+      "j reads the other correctly when answers 2 and 3 both fit the facts, misreads when both miss, and is indeterminate otherwise.",
+      "Actions: consensus 'freeze the item' · false conflict 'show both views' · dissensus 'ask for evidence' · false consensus 'check the key'.",
+      "A = 2, B = 3, A expects B at 1 → agreement 1, congruency 1, accuracy 2 → indeterminate.",
+      "Shared error: 'they agree, and the answer key says both are wrong', a separate failure."
+     ],
+     "topic": "T17"
+    },
+    {
+     "id": "w10-s17",
+     "image": "important/w10-s17.jpg",
+     "title": "How agents create the two false states",
+     "remember": [
+      "A, an agreeable assistant: in a working session Claude agrees 'R5 covers mobile pages too' (sycophancy).",
+      "She expects α to read R5 her way, but α's unprimed blind runs say 'desktop only' in 14 of 20 → false consensus. Repair: test R5 on a mobile fixture page.",
+      "B, two word lists: both teams rate F4 at 2, but α writes 'high' and β writes 'low'.",
+      "Team B reads 'high' as 4, Team A reads 'low' as 0 → each expects a gap of 2 → false conflict. Repair: SPEC.md fixes severity as a number 0–4, one example per level.",
+      "'Both false states start in what one party assumes about another.'"
+     ],
+     "topic": "T17"
+    },
+    {
+     "id": "w10-s25",
+     "image": "important/w10-s25.jpg",
+     "title": "Worked example: eight people, one severity rating",
+     "remember": [
+      "E7 = severity of F7 (0–4), c = 1.0. Team A's mean 3.75, Team B's mean 1.75. Each person is scored against the OTHER team's mean.",
+      "A1: own 4, estimate 4 → agreement |4 − 1.75| = 2.25, congruency 0, accuracy 2.25 → false consensus.",
+      "A4: own 4, estimate 2 → agreement 2.25, congruency 2, accuracy 0.25 → dissensus (expected a gap and read Team B well).",
+      "Only A4 and B4 read it right; six of eight assumed the other team rated F7 as they did.",
+      "Majority in each team misreads → pair state false consensus. Fix: severity anchors in SPEC.md, then re-rate."
+     ],
+     "topic": "T17"
+    }
+   ]
+  }
+ ]
+}

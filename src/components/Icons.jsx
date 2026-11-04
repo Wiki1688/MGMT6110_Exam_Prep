@@ -14,3 +14,5 @@ export const Alert = (p) => <svg {...base} {...p}><path d="M10.3 3.9L1.8 18a2 2 
 export const Brain = (p) => <svg {...base} {...p}><path d="M9 3a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 1 5.8A3 3 0 0 0 9 21a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zM15 3a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-1 5.8A3 3 0 0 1 15 21a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z" /></svg>;
 export const Play = (p) => <svg {...base} {...p} fill="currentColor" stroke="none"><path d="M7 4.5v15l12-7.5z" /></svg>;
 export const Grid = (p) => <svg {...base} {...p}><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></svg>;
+export const Close = (p) => <svg {...base} {...p}><path d="M18 6L6 18M6 6l12 12" /></svg>;
+export const Images = (p) => <svg {...base} {...p}><rect x="3" y="5" width="15" height="13" rx="2" /><path d="M7 2h12a2 2 0 0 1 2 2v11" /><path d="M3 15l4-4 4 4 3-3 4 4" /></svg>;

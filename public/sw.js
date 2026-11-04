@@ -1,10 +1,15 @@
-/* MGMT6110 Exam Prep - simple service worker.
-   App shell: cache-first. Content JSON/images: network-first with cache fallback. */
-const VERSION = 'mgmt6110-v2';
+/* MGMT6110 Exam Prep — service worker (v3, Nov 2026).
+   - Content (/content/*: slides.json, important.json, extra files, images): network-first with a
+     no-cache fetch, so JSON is never stale; the cached copy is used only when offline.
+   - Pages: network-first, cached index.html when offline.
+   - Hashed assets (/assets/*) and icons: cache-first.
+   - skipWaiting + clients.claim: a new deploy takes over at once; the page shows a refresh toast. */
+const VERSION = 'mgmt6110-v4-2026-11-04-w10';
 const SHELL = ['/', '/index.html', '/manifest.json', '/icons/icon.svg'];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(VERSION).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
+  self.skipWaiting();
+  e.waitUntil(caches.open(VERSION).then((c) => c.addAll(SHELL)).catch(() => {}));
 });
 
 self.addEventListener('activate', (e) => {
@@ -14,35 +19,44 @@ self.addEventListener('activate', (e) => {
   );
 });
 
+self.addEventListener('message', (e) => {
+  if (e.data === 'SKIP_WAITING') self.skipWaiting();
+});
+
+function networkFirst(req, cacheKey) {
+  // A navigation Request cannot be re-created with options, so only content fetches get cache: 'no-cache'.
+  const p = req.mode === 'navigate' ? fetch(req) : fetch(req, { cache: 'no-cache' });
+  return p.then((res) => {
+    if (res && res.ok) {
+      const copy = res.clone();
+      caches.open(VERSION).then((c) => c.put(cacheKey || req, copy)).catch(() => {});
+    }
+    return res;
+  }).catch(() => caches.match(cacheKey || req).then((hit) => hit || Response.error()));
+}
+
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;
 
-  // Content (slides, extra files, images): try network, fall back to cache.
   if (url.pathname.startsWith('/content/')) {
-    e.respondWith(
-      fetch(req).then((res) => {
-        const copy = res.clone();
-        caches.open(VERSION).then((c) => c.put(req, copy));
-        return res;
-      }).catch(() => caches.match(req))
-    );
+    e.respondWith(networkFirst(req));
     return;
   }
 
-  // Navigation requests: serve the cached shell when offline.
   if (req.mode === 'navigate') {
-    e.respondWith(fetch(req).catch(() => caches.match('/index.html')));
+    e.respondWith(networkFirst(req, '/index.html'));
     return;
   }
 
-  // Everything else (hashed JS/CSS): cache-first.
   e.respondWith(
     caches.match(req).then((hit) => hit || fetch(req).then((res) => {
-      const copy = res.clone();
-      caches.open(VERSION).then((c) => c.put(req, copy));
+      if (res.ok && (url.pathname.startsWith('/assets/') || url.pathname.startsWith('/icons/'))) {
+        const copy = res.clone();
+        caches.open(VERSION).then((c) => c.put(req, copy));
+      }
       return res;
     }))
   );

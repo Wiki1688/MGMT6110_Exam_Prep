@@ -1,10 +1,16 @@
 // Countdown helpers using the Asia/Singapore calendar day.
 const TZ = 'Asia/Singapore';
 
-export const EXAMS = [
-  { key: 'quiz4', label: 'Quiz 4', when: 'Wed 4 Nov 2026', date: '2026-11-04' },
-  { key: 'final', label: 'Final', when: 'Thu 12 Nov 2026 1pm', date: '2026-11-12' },
-];
+// One countdown only: the final exam.
+export const FINAL = { key: 'final', label: 'Final exam', when: 'Thu 12 Nov 2026 · 1 pm', date: '2026-11-12' };
+export const EXAMS = [FINAL];
+
+export function examMessage(n) {
+  if (n > 1) return `${n} days left`;
+  if (n === 1) return 'Tomorrow — light review, sleep early';
+  if (n === 0) return 'Exam day! 1 pm · you have got this';
+  return 'Done — well done';
+}
 
 function sgToday() {
   const fmt = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' });

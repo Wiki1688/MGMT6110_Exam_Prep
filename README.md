@@ -1,11 +1,33 @@
 # MGMT6110 Exam Prep
 
-A phone-and-laptop revision app for MGMT6110 Human-AI Collaboration (Quiz 4 on Wed 4 Nov 2026, Final on Thu 12 Nov 2026 1pm).
+A phone-and-laptop revision app for MGMT6110 Human-AI Collaboration. **Final exam: Thu 12 Nov 2026, 1 pm (Asia/Singapore).** Quiz 4 (4 Nov) is over, so its countdown is gone.
 
 - Reads slides from `public/content/slides.json` at runtime. Add new material by editing JSON. No code change.
-- Tracks per-slide **seen** / **mastered** and **bookmarks** (star) in the browser's localStorage. Export/import a JSON file to sync phone and laptop.
+- Tracks per-slide **seen** / **mastered** and **bookmarks** (star) in the browser (localStorage + an IndexedDB copy). Back up / import a JSON file to sync phone and laptop.
+- **Important slides** tab: a gallery of the must-know slide images with full-screen pinch/double-tap zoom.
 - Installable PWA (works offline after the first visit). Light/dark theme. Font size S/M/L/XL.
 - Keyboard: `←` `→` move slides, `B` bookmark, `M` mastered, `Esc` back to Home. On the phone: swipe, or tap the left/right edge of the slide.
+
+## What changed in v2 (4 Nov 2026)
+
+**Progress is safer**
+- Every tap (seen, mastered, mark/star) is saved **at once**, and again when the app is hidden or closed.
+- **Two windows no longer overwrite each other**: before writing, the app reads what is stored and merges slide by slide (each mark carries its own on/off time, the newest wins; "seen" is combined). Other open windows pick up the change straight away.
+- Your **topic + slide** is kept in the address (`/topic/T08/5`), so a reload or a fold/unfold returns to the same slide; if Android closes the app and you reopen it from the home-screen icon within 12 hours, it goes straight back to that slide. Leaving the reader for Home turns this off.
+- Every save is **mirrored to IndexedDB** and restored from there if localStorage is ever empty or corrupt.
+- The app asks the phone not to clear its data (`navigator.storage.persist()`); Settings shows *Storage: protected* or *Storage: may be cleared by the phone*.
+- **Back up now** in Settings (and a Home reminder once you have seen more than 20 slides and not backed up for 3 days).
+- Import **merges by default**; *Replace* is the other choice. Old (format 1) files still import.
+
+**Foldable layouts (Honor Magic V3)**
+- Cover screen (≈ 385 × 860): compact header, big buttons, no sideways scrolling, sticky **Prev / Master / Mark / Next** bar.
+- Inner screen (≈ 785 × 850 or 850 × 785): **two-column topic grid** on Home; the reader shows the **slide on the left** and **memorise line, exam tip, trap, your marked slides and the slide list on the right**; the Important viewer puts the "Remember" notes beside the image. Fold/unfold switches layout without losing your place.
+- `dvh` units, `env(safe-area-inset-*)`, `viewport-fit=cover`; panes line up with a reported hinge (`horizontal-viewport-segments`) where supported. Smallest text size setting is now 17 px.
+
+**Other**
+- One countdown: **Final exam · Thu 12 Nov 2026 · 1 pm**, with an exam-day message.
+- **Important slides** (new tab + Home card), see section 6.
+- Service worker: content JSON is always fetched fresh (network-first, no-cache), a new deploy takes over immediately and the app shows **"New version available — tap to refresh"**. Manifest orientation is now `any` so the unfolded landscape screen works when installed.
 
 ## 1. Run locally
 
@@ -98,34 +120,66 @@ Field notes:
 - `kind` changes how the slide is drawn. `compare` needs `table`; `diagram` needs `image` (path relative to `public/content/`, e.g. `img/T08-loop.svg`); `memorise` puts the `memorise` line in a big box.
 - `exam` slides are MCQs: put the question in `body`, add `"options": ["A…","B…","C…","D…"]`, `"answer": 1` (0-based index) and an optional `"explanation"`.
 - `body`, `table`, `image`, `tip`, `trap`, `memorise` are all optional on every kind.
-- Topic colours (keep consistent): T01 #2563EB, T02 #7C3AED, T03 #0891B2, T04 #0D9488, T05 #65A30D, T06 #CA8A04, T07 #EA580C, T08 #DC2626, T09 #DB2777, T10 #9333EA, T11 #4F46E5, T12 #0EA5E9, T13 #16A34A, T14 #F59E0B, T15 #64748B, T16 #111827.
+- Topic colours (keep consistent): T01 #2563EB, T02 #7C3AED, T03 #0891B2, T04 #0D9488, T05 #65A30D, T06 #CA8A04, T07 #EA580C, T08 #DC2626, T09 #DB2777, T10 #9333EA, T11 #4F46E5, T12 #0EA5E9, T13 #16A34A, T14 #F59E0B, T15 #64748B, T16 #111827, T17 #BE185D, T18 #0F766E, T19 #B45309.
 
 Validate your JSON before pushing (for example paste it into jsonlint.com). If a file fails to load, Home shows a warning at the bottom.
 
-`scripts/sync-content.sh` copies the master content folder (`/home/claude/mgmt6110/build/content`) into `public/content/`. Run `npm run sync-content` or `bash scripts/sync-content.sh /path/to/content`.
+`scripts/sync-content.sh` copies the master content folder (`/home/claude/mgmt6110/build/content`) into `public/content/`. Run `npm run sync-content` or `bash scripts/sync-content.sh /path/to/content`. It never overwrites `important.json` or `important/`, which are curated inside the app.
 
-## 5. Sync progress between phone and laptop
+## 5. Back up, restore and sync progress
 
-Progress (seen, mastered, bookmarks, last slide) is stored per device. To move it:
+Progress (seen, mastered, marks, important-slide stars, last slide) is stored on each device (localStorage key `mgmt6110-exam-prep`, mirrored to IndexedDB).
 
-1. On device A open **Settings → Export progress**. A file `mgmt6110-progress-….json` downloads.
-2. Send that file to device B (AirDrop, WhatsApp, email to yourself, iCloud/Google Drive).
-3. On device B open **Settings → Import progress**, choose **Merge** (keeps both sides) or **Replace**, and pick the file.
+1. On device A open **Settings → Back up now**. A file `mgmt6110-exam-prep-backup-….json` downloads (export **format 2**).
+2. Send that file to device B (WhatsApp, email to yourself, Google Drive).
+3. On device B open **Settings → Import a backup**. **Merge** is the default: the newest mark for each slide wins and "seen" is combined, so nothing is lost and importing twice changes nothing. **Replace** makes device B exactly match the file (asks to confirm).
 
-Do this in both directions whenever you switch devices.
+Format-1 files from v1 (`mastered: {id: true}`, `bookmarks: {id: timestamp}`) are still accepted. In v2 the stored shape is `mastered/bookmarks: {id: {on, at}}`, `seen: {id: firstSeenTime}`, plus `backupAt` and `epoch` (changes on Reset/Replace so other windows follow).
+
+*Storage: protected* in Settings means the browser has agreed not to clear the data; *may be cleared by the phone* means back up now and then (installing to the home screen usually upgrades this).
+
+## 6. Important slides (gallery + zoom viewer)
+
+The **Important** tab (and the Home card) reads `public/content/important.json`:
+
+```json
+{
+  "groups": [
+    {
+      "id": "week9", "title": "Week 9 · Mapping the Territory", "week": "Week 9",
+      "slides": [
+        {
+          "id": "six-questions",
+          "image": "important/w9-six-questions.jpg",
+          "title": "Q1–Q6: the six questions",
+          "remember": ["Six questions place any agent on the map.", "The gate moves to before the action."],
+          "topic": "T13"
+        }
+      ]
+    }
+  ]
+}
+```
+
+How to add the real slides:
+1. Export each slide as a JPG/PNG (1600 px wide is plenty) and put the files in `public/content/important/`.
+2. Edit `public/content/important.json`: one group per week/theme, one entry per slide. `image` is relative to `public/content/`. `id` must be unique and should not change later (stars and "seen" are stored against it, as `imp:<id>`). `topic` (e.g. `T10`) colours the card and adds an "Open T10" link. `remember` is a list of short lines shown under (cover) or beside (unfolded) the image.
+3. Commit. (v2.1 ships 24 real slides: the student's selection from Weeks 7–9 plus ten Week 10 Co-Collaboration Model slides.)
+
+In the viewer: **pinch** or **double-tap** to zoom (up to 5×), drag to pan, double-tap again to reset, **swipe** or `←` `→` for the next slide, the **star** to keep it (it then also appears on the Marked page), `Esc` to close. On a laptop, Ctrl/⌘ + mouse wheel zooms and the − / + buttons work everywhere. If `important.json` is missing the tab just shows an empty state.
 
 ## Project layout
 
 ```
 index.html              app shell, title "MGMT6110 Exam Prep"
 public/manifest.json    PWA manifest
-public/sw.js            service worker (caches app shell + content)
-public/content/         slides.json, index.json, extra/, img/
+public/sw.js            service worker (network-first content, refresh toast; bump VERSION per release)
+public/content/         slides.json, index.json, extra/, img/, important.json, important/
 src/App.jsx             routing + theme
-src/views/              Home, Topic (reader), Bookmarks, Search, Settings
-src/components/         Slide renderer, nav, progress ring, icons
-src/lib/                content loader/merger, localStorage store, dates, router
+src/views/              Home, Topic (reader), Important (gallery + viewer), Bookmarks, Search, Settings
+src/components/         Slide renderer, ZoomImage (pinch/double-tap zoom), UpdateToast, nav, progress ring, icons
+src/lib/                content loader/merger, store (merge-safe, IndexedDB mirror), idb, useMedia (foldable layouts), dates, router
 scripts/sync-content.sh copies master content into public/content
 scripts/screenshots.cjs dev helper: renders icons + Playwright screenshots
-vercel.json             SPA rewrite
+vercel.json             SPA rewrite + no-cache headers for content and sw.js
 ```

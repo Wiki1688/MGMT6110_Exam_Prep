@@ -24,6 +24,10 @@ export function parsePath(path) {
   if (parts[0] === 'topic' && parts[1]) {
     return { view: 'topic', topicId: parts[1], slideIndex: parts[2] ? Math.max(0, parseInt(parts[2], 10) - 1 || 0) : 0 };
   }
+  if (parts[0] === 'important') {
+    if (parts[1]) return { view: 'important', groupId: decodeURIComponent(parts[1]), index: Math.max(0, (parseInt(parts[2], 10) || 1) - 1) };
+    return { view: 'important' };
+  }
   if (parts[0] === 'bookmarks') return { view: 'bookmarks' };
   if (parts[0] === 'search') return { view: 'search' };
   if (parts[0] === 'settings') return { view: 'settings' };

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Home, Star, SearchIcon, Gear } from './Icons.jsx';
+import { Home, Star, SearchIcon, Gear, Images } from './Icons.jsx';
 
 const items = [
   { to: '/', label: 'Home', Icon: Home },
+  { to: '/important', label: 'Important', Icon: Images },
   { to: '/bookmarks', label: 'Marked', Icon: Star },
   { to: '/search', label: 'Search', Icon: SearchIcon },
   { to: '/settings', label: 'Settings', Icon: Gear },

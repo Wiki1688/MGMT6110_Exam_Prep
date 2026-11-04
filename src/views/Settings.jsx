@@ -1,4 +1,16 @@
 import React, { useRef, useState } from 'react';
+import { usePersistState, countOn, parseImport } from '../lib/store.js';
+import { formatVisited } from '../lib/dates.js';
+
+export function downloadBackup(text) {
+  const blob = new Blob([text], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-');
+  a.href = url; a.download = `mgmt6110-exam-prep-backup-${stamp}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
 
 const SIZES = ['S', 'M', 'L', 'XL'];
 const THEMES = [['auto', 'Auto'], ['light', 'Light'], ['dark', 'Dark']];
@@ -7,16 +19,12 @@ export default function Settings({ store, actions, content }) {
   const fileRef = useRef(null);
   const [msg, setMsg] = useState('');
   const [importMode, setImportMode] = useState('merge');
+  const persist = usePersistState();
 
   const doExport = () => {
-    const text = actions.exportJson();
-    const blob = new Blob([text], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-');
-    a.href = url; a.download = `mgmt6110-progress-${stamp}.json`; a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 2000);
-    setMsg('Progress file downloaded. Send it to your other device (AirDrop, WhatsApp, email) and import it there.');
+    downloadBackup(actions.exportJson());
+    actions.markBackedUp();
+    setMsg('Backup downloaded. Send it to yourself (WhatsApp, email) and import it on your other device.');
   };
 
   const doImport = async (e) => {
@@ -24,8 +32,10 @@ export default function Settings({ store, actions, content }) {
     if (!file) return;
     try {
       const text = await file.text();
+      const { format } = parseImport(text);
+      if (importMode === 'replace' && !window.confirm('Replace ALL progress on this device with the file?')) { e.target.value = ''; return; }
       actions.importJson(text, importMode);
-      setMsg(`Imported ${file.name} (${importMode}).`);
+      setMsg(`Imported ${file.name} (format ${format}, ${importMode === 'merge' ? 'merged: the latest mark for each slide wins' : 'replaced this device'}).`);
     } catch (err) {
       setMsg(`Import failed: ${err.message}`);
     }
@@ -39,7 +49,7 @@ export default function Settings({ store, actions, content }) {
     }
   };
 
-  const seen = Object.keys(store.seen).length, mastered = Object.keys(store.mastered).length, marks = Object.keys(store.bookmarks).length;
+  const seen = Object.keys(store.seen).filter((k) => !k.startsWith('imp:')).length, mastered = countOn(store.mastered), marks = countOn(store.bookmarks), impMarks = countOn(store.bookmarks, 'imp:');
 
   return (
     <div className="page settings">
@@ -64,16 +74,17 @@ export default function Settings({ store, actions, content }) {
       </section>
 
       <section className="card">
-        <h2>Sync progress between phone and laptop</h2>
-        <p className="muted">Progress is saved on this device only. Export here, then import on the other device. "Merge" keeps both sides; "Replace" overwrites this device.</p>
-        <p className="muted">On this device: {seen} seen · {mastered} mastered · {marks} marked.</p>
+        <h2>Back up, restore and sync</h2>
+        <p><span className={`status ${persist === 'protected' ? 'ok' : 'warn'}`} data-testid="persist-status">{persist === 'protected' ? 'Storage: protected' : persist === 'unknown' ? 'Storage: checking…' : 'Storage: may be cleared by the phone'}</span></p>
+        <p className="muted">Progress is saved on this device the moment you tap (and copied to a second store in the browser). {persist === 'protected' ? 'The browser has agreed not to clear it.' : 'The phone may still clear it when storage runs low, so back up now and then.'} Import on another device to carry it over. "Merge" keeps both sides (the latest mark for each slide wins); "Replace" overwrites this device.</p>
+        <p className="muted">On this device: {seen} seen · {mastered} mastered · {marks} marked · {impMarks} important starred · last backup {store.backupAt ? formatVisited(store.backupAt) : 'never'}.</p>
         <div className="row">
-          <button className="btn primary" onClick={doExport}>Export progress</button>
-          <button className="btn" onClick={() => fileRef.current?.click()}>Import progress</button>
-          <input ref={fileRef} type="file" accept="application/json,.json" hidden onChange={doImport} />
+          <button className="btn primary" onClick={doExport}>Back up now</button>
+          <button className="btn" onClick={() => fileRef.current?.click()}>Import a backup</button>
+          <input ref={fileRef} type="file" accept="application/json,.json" hidden onChange={doImport} data-testid="import-input" />
         </div>
-        <div className="seg small">
-          <button className={importMode === 'merge' ? 'on' : ''} onClick={() => setImportMode('merge')}>Merge</button>
+        <div className="seg small" aria-label="Import mode">
+          <button className={importMode === 'merge' ? 'on' : ''} onClick={() => setImportMode('merge')}>Merge (default)</button>
           <button className={importMode === 'replace' ? 'on' : ''} onClick={() => setImportMode('replace')}>Replace</button>
         </div>
         {msg && <p className="notice">{msg}</p>}

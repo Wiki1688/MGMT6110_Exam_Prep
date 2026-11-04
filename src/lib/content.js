@@ -51,7 +51,31 @@ export async function loadContent() {
   }
   const merged = mergeContent(base, extras);
   merged.warnings = warnings;
+  merged.important = await loadImportant(warnings);
   return merged;
+}
+
+/** Optional /content/important.json: { groups: [ { id, title, week, slides: [ { id, image, title, remember: [], topic } ] } ] }.
+ *  Missing file = no Important slides (the tab shows an empty state). Slide ids get an "imp:" prefix in progress. */
+export async function loadImportant(warnings = []) {
+  let data;
+  try { data = await fetchJson('/content/important.json'); } catch { return { groups: [], total: 0 }; }
+  const groups = [];
+  const used = new Set();
+  for (const [gi, g] of (Array.isArray(data?.groups) ? data.groups : []).entries()) {
+    if (!g) continue;
+    const gid = String(g.id || `G${gi + 1}`);
+    const slides = [];
+    for (const [si, sl] of (Array.isArray(g.slides) ? g.slides : []).entries()) {
+      if (!sl || !sl.image) { warnings.push(`important.json: slide ${si + 1} in ${gid} has no image`); continue; }
+      let id = String(sl.id || `${gid}-${si + 1}`);
+      while (used.has(id)) id += '_';
+      used.add(id);
+      slides.push({ ...sl, id, key: 'imp:' + id, remember: Array.isArray(sl.remember) ? sl.remember : sl.remember ? [String(sl.remember)] : [] });
+    }
+    if (slides.length) groups.push({ ...g, id: gid, title: g.title || gid, slides });
+  }
+  return { groups, total: groups.reduce((n, g) => n + g.slides.length, 0) };
 }
 
 export function resolveImage(src) {
