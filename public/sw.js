@@ -4,7 +4,7 @@
    - Pages: network-first, cached index.html when offline.
    - Hashed assets (/assets/*) and icons: cache-first.
    - skipWaiting + clients.claim: a new deploy takes over at once; the page shows a refresh toast. */
-const VERSION = 'mgmt6110-v4-2026-11-04-w10';
+const VERSION = 'mgmt6110-v5-2026-11-05-pack';
 const SHELL = ['/', '/index.html', '/manifest.json', '/icons/icon.svg'];
 
 self.addEventListener('install', (e) => {

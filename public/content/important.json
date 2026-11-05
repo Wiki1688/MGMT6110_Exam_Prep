@@ -1,7 +1,223 @@
 {
- "version": "2026-11-04",
- "note": "Student's selection (Important_Slides_to_Print.pptx) plus ten Week 10 Co-Collaboration Model slides.",
+ "version": "2026-11-05-v3",
+ "note": "Prof Roh's revision pack key pages (class use only) + student's selection + ten Week 10 Co-Collaboration Model slides.",
  "groups": [
+  {
+   "id": "pack",
+   "title": "Prof Roh's revision pack — key pages",
+   "week": "Final exam",
+   "notice": "From Prof Roh's revision pack — for MGMT6110 class use only; do not circulate",
+   "slides": [
+    {
+     "id": "pack-p003",
+     "image": "important/pack-p003.jpg",
+     "title": "What the final exam asks of you (pack p.3)",
+     "topic": "T00",
+     "remember": [
+      "Part A: 10 multiple-choice questions × 1 point = 10. Each is a short business case with four options, one right, written like the forty quiz questions.",
+      "Part B: 5 questions × 4 points = 20. Each has parts (a) to (d), one point each: define a concept, then use it on a short business problem.",
+      "Part B problems: read a table, place a task or product on a map, name the state two teams are in, choose a setting, or say what a person should check before an agent acts.",
+      "15 questions, 30 points, 30% of the grade. Whole course, Weeks 1 to 10. Closed book, no AI tools. Check date, time and venue on eLearn.",
+      "Practise: Part A = the 40 quiz questions with answers covered; Part B = write the five practice answers by hand and mark them define, explain, apply, check."
+     ]
+    },
+    {
+     "id": "pack-p004",
+     "image": "important/pack-p004.jpg",
+     "title": "What a full answer to a 4-point question does (pack p.4)",
+     "topic": "T00",
+     "remember": [
+      "(a) Define it: the concept in course terms, in one or two sentences, naming its parts.",
+      "(b) Explain how it works: the mechanism, e.g. the spread of next tokens, the judge built from rankings, the trigger, the gate.",
+      "(c) Apply it to the case: compute the rate, place the task, name the state or choose the setting, and show the step.",
+      "(d) Say what to check or do next: the source to open, the gate to set, the evidence that would change the decision.",
+      "Worked example (Quiz 1 Q5, temperature): near 0 for disclosure text, moderate for taglines; a person still compares the disclosure with the approved text, because low temperature makes output repeatable, not correct. A definition alone earns 1 point."
+     ]
+    },
+    {
+     "id": "pack-p152",
+     "image": "important/pack-p152.jpg",
+     "title": "Where Part B answers lose points (pack p.152)",
+     "topic": "T00",
+     "remember": [
+      "Defined the term and stopped: the definition is one point of four. Use it on the case and say what a person checks.",
+      "Said 'the model knows' or 'the AI decided': say what the system did (predicted the next token, called a tool, returned a score).",
+      "Read one cell of a table: compute the rate in each row and compare them.",
+      "Placed a product by its name: answer Q1 (Who starts a run?) and Q3 (What can it touch?) from its settings.",
+      "Put the gate in the prompt: put it in the settings (drafts only, a narrower key, an approval before the action). Named no check: say what a person opens, compares or approves, and when."
+     ]
+    },
+    {
+     "id": "pack-p153",
+     "image": "important/pack-p153.jpg",
+     "title": "How to revise in the days before the exam (pack p.153)",
+     "topic": "T00",
+     "remember": [
+      "1. Test yourself on the quizzes: answers covered, commit to an option first, note the ones you missed.",
+      "2. Go back to the source: the concept slide, then one source under 'Where we met it'.",
+      "3. Write Part B by hand: five practice answers, about ten minutes each, marked define, explain, apply, check.",
+      "4. Read one agent's record top to bottom and place it on the map with Q1 to Q6.",
+      "Facts about products (plans, prices, countries) change every week and are not tested; the exam tests reading a model, a table, a task or an agent and saying what a person should do next."
+     ]
+    },
+    {
+     "id": "pack-p006",
+     "image": "important/pack-p006.jpg",
+     "title": "Our ten weeks on one page (pack p.6)",
+     "topic": "T00",
+     "remember": [
+      "Weeks 1–3: from predictive to generative AI, tokens, reasoning LLMs; studios Stitch → front end (PS1) → back end with the LTA bus API (PS2).",
+      "Week 4: confirmation bias (Quiz 1); Clarity and Disqus (PS3). Week 5: From Chatbots to Agents; usability and heuristic evaluation (PS4).",
+      "Week 6: An Agent That Works While You Do Not (Quiz 2); autonomous agents with Claude Code. No problem set.",
+      "Week 7: Building AI Agents I and the Map of Human-AI Collaboration; Zapier (PS5). Week 8: memory and tools, the Co-Collaboration Model (Quiz 3); Claude routines (PS6).",
+      "Week 9: mapping the territory of AI agents (PS7). Week 10: inside the harness (Quiz 4); PS8 with Muse and Claude."
+     ]
+    },
+    {
+     "id": "pack-p007",
+     "image": "important/pack-p007.jpg",
+     "title": "Where the forty quiz questions came from (pack p.7)",
+     "topic": "T00",
+     "remember": [
+      "Each chip is one quiz question, placed in the week its idea was first taught in depth.",
+      "Most questions came from Week 1 (10), Week 3 (8), Week 5 (6), Week 7 (5) and Week 9 (5).",
+      "No quiz question came from Week 6 or Week 10, because Quiz 4 ran before the Week 10 lecture.",
+      "The final covers the whole course: read the Week 6 lecture (agents that work while you do not) and the Week 10 lecture (the harness) with the same care.",
+      "Quizzes 3 and 4 each reached back to the confirmation-bias table (Week 4) and the heuristics (Week 5)."
+     ]
+    },
+    {
+     "id": "pack-p025",
+     "image": "important/pack-p025.jpg",
+     "title": "Quiz 1 in a nutshell (pack p.25)",
+     "topic": "T01",
+     "remember": [
+      "Next-token prediction: the model scores every possible next token and picks one, again and again; a person checks the content even when the text reads well.",
+      "Tokens: pieces of text, numbers arrive in pieces; ask for code (and check it) when a task needs arithmetic.",
+      "The spread and decoding: a probability for each candidate; greedy takes the top, sampling draws. Temperature: how flat the spread is.",
+      "The three steps: people write answers (supervised fine-tuning), people rank answers (reward model), a judge teaches.",
+      "Made-up answers: plausible text where training text was thin; check niche, recent, local and private claims at the source."
+     ]
+    },
+    {
+     "id": "pack-p046",
+     "image": "important/pack-p046.jpg",
+     "title": "Quiz 2 in a nutshell (pack p.46)",
+     "topic": "T02",
+     "remember": [
+      "The reward model (RLHF, reinforcement learning from human feedback): people rank answers, a second model learns the ranking. Verifiable rewards (RLVR): a rule or test scores the answer.",
+      "The back end and its key: the key lives in a server-side environment variable, read only by the back end.",
+      "The full table: compare the rates across rows before claiming a link; ask for the cells a claim left out.",
+      "Greedy, sampling and temperature; the five-part master prompt: Role, Goal, Output, Guardrails and Context, Goal written first.",
+      "Nielsen's heuristics: ten principles to inspect a screen and its server; pre-training: a distribution over the next token, fixed at training time."
+     ]
+    },
+    {
+     "id": "pack-p064",
+     "image": "important/pack-p064.jpg",
+     "title": "Quiz 3 in a nutshell (pack p.64)",
+     "topic": "T10",
+     "remember": [
+      "The Map of Human-AI Collaboration: two questions place a TASK — Does it have a right answer? Must people and AI do it together, or can either do it alone? Place tasks one at a time.",
+      "Nielsen's heuristics 2, 3 and 4: match the users' words; user control and freedom (a way back from a mistake); consistency and standards.",
+      "Triggers and actions: the event that starts a run, and what the automation then does.",
+      "Generative vs agentic AI: the AI writes and a person acts, or the AI acts in other systems in a loop; set a gate before any action that is hard to undo.",
+      "The API key: kept on the server, read only by the back end. The full table: the success rate of each row, compared across rows."
+     ]
+    },
+    {
+     "id": "pack-p101",
+     "image": "important/pack-p101.jpg",
+     "title": "Quiz 4 in a nutshell (pack p.101)",
+     "topic": "T13",
+     "remember": [
+      "Congruency (own view vs own estimate of the other team) and accuracy (estimate vs the other team's actual view).",
+      "Workflow or agent: who chooses the next step — the flowchart a person drew, or the model.",
+      "The Week 9 product map: Q1 (Who starts a run?) and Q3 (What can it touch?); once a product reaches Autopilot the gate goes before the action.",
+      "The families: the job you hand an agent decides its family. The harness: everything around the model, from the trigger to the gate.",
+      "Predictive AI: a case in, a score or label out, an input to a person's decision. Error Prevention and falsification: make the slip impossible; ask what would prove the plan wrong."
+     ]
+    },
+    {
+     "id": "pack-p098",
+     "image": "important/pack-p098.jpg",
+     "title": "The harness: same model, two products (Quiz 4 Q8) (pack p.98)",
+     "topic": "T13",
+     "remember": [
+      "Answer C: their harnesses give them different triggers, permissions, memory and control flow.",
+      "The harness is everything around the model: instructions, tools, memory, control flow, validation and permissions, with a trigger that starts each run and a gate where a person approves.",
+      "The file-answering product waits for you and stops after one reply; the overnight product has a clock, permission to update records, files kept between runs and a loop.",
+      "Wrong: more parameters or older training data do not give a product a clock or a permission; 'identical models behave identically' contradicts the Week 9 rule.",
+      "Week 9: the same model in a different harness makes a different product (Week 10 lecture slide 47: what the harness decides)."
+     ]
+    },
+    {
+     "id": "pack-p114",
+     "image": "important/pack-p114.jpg",
+     "title": "Stitch to an API in a nutshell (pack p.114)",
+     "topic": "T04",
+     "remember": [
+      "Stitch: paragraph → screens + HTML/Tailwind; refine details in the free editor, do not regenerate.",
+      "Google AI Studio: master prompt → running app; never cure a blank Vercel page by adding GEMINI_API_KEY (that publishes it).",
+      "GitHub: every push is a version; if a key leaks, rotate first and tidy second.",
+      "Vercel: builds every push, holds the key, runs api/; after saving a variable, Redeploy, then read /api/health; api/ sits at the root, not inside src/.",
+      "The API: called only from your own function; never from the browser or with a VITE_ name. Part B (d): name the station and where its result shows."
+     ]
+    },
+    {
+     "id": "pack-p132",
+     "image": "important/pack-p132.jpg",
+     "title": "Clarity, Disqus and heuristics in a nutshell (pack p.132)",
+     "topic": "T06",
+     "remember": [
+      "Microsoft Clarity: what visitors DO (recordings, heatmaps, rage and dead clicks), not why; check your own visit or clarity.ms/collect in the Network tab.",
+      "Disqus: what visitors choose to SAY; open the Pending and Spam tabs.",
+      "Heuristic evaluation: where the design breaks Nielsen's ten, with a severity; three to five reviewers, each alone first; it predicts, it does not show what people do.",
+      "The four-way table: with so few reviewers report counts, never percentages; push predictions.md first; read rows 2 and 4 first.",
+      "The fix order: severity 4 first, then walk the finding again on the live address and reply to every comment."
+     ]
+    },
+    {
+     "id": "pack-p141",
+     "image": "important/pack-p141.jpg",
+     "title": "On the map: each agent moves when we change a setting (pack p.141)",
+     "topic": "T19",
+     "remember": [
+      "Week 9 map: Q1 (Who starts a run? you, each time → a schedule, an event or itself) across; Q3 (What can it touch? reads only → changes things) up.",
+      "Quadrants: Ask (you start it, reads only), Delegate (you start it, changes things), Monitor (it starts itself, reads only), Autopilot (it starts itself, changes things).",
+      "Muse: a question = Ask; a task that browses and asks before it books = Delegate; a recurring watch that only reports = Monitor; a recurring task that sends via a connector set to Always allow = Autopilot.",
+      "PS5 Zap → Zap to a team, Run 4a → Run 4b: each reaches Autopilot through a setting, so the gate moves to before the action.",
+      "Week 9 advice: start in Ask and Monitor; move one job at a time into Autopilot, each with its own gate and a record someone reads."
+     ]
+    },
+    {
+     "id": "pack-p143",
+     "image": "important/pack-p143.jpg",
+     "title": "Co-collaboration in principle: three questions about two teams, one about the source (pack p.143)",
+     "topic": "T17",
+     "remember": [
+      "Two units (people + their agents) work through one shared SPEC.md that changes only by a pull request both teams approve.",
+      "1. Do we agree? Agreement: the two teams' own views compared — one per pair.",
+      "2. Do we think we agree? Congruency: each team's own view vs its guess of the other — two per pair.",
+      "3. Do we read each other correctly? Accuracy: each team's guess vs the other team's actual view.",
+      "4. Are we right? The key: agreement does not make an answer correct; check against the source (manual, test, fixture)."
+     ]
+    },
+    {
+     "id": "pack-p144",
+     "image": "important/pack-p144.jpg",
+     "title": "Five states, and what each asks the teams to do (pack p.144)",
+     "topic": "T17",
+     "remember": [
+      "Consensus: they agree and each sees it — go ahead, but check the key first.",
+      "Dissensus: they disagree and each sees it — argue it in the open, test on a fixture, settle it in SPEC.md.",
+      "False consensus: they disagree but both believe they agree — the costliest; show each team the other's actual answer and write anchors into SPEC.md.",
+      "False conflict: they agree but one or both believe they disagree — show the actual answers and write the shared rule down with a test case.",
+      "Shared error: they agree and both believe they are right, but the answer is wrong — correct it against the source and cite the source in SPEC.md."
+     ]
+    }
+   ]
+  },
   {
    "id": "week7-agents",
    "title": "Week 7 · Building AI Agents I: the model, the loop and the reasoning",

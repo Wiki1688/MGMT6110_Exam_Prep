@@ -1,7 +1,183 @@
 {
- "version": "2026-11-04",
+ "version": "2026-11-05-v3",
  "course": "MGMT6110 Human-AI Collaboration",
  "topics": [
+  {
+   "id": "T00",
+   "title": "The final exam: how it is marked",
+   "week": "Final exam",
+   "color": "#111827",
+   "carry": "Part A 10 × 1 point · Part B 5 × 4 points; every Part B answer does Define → Explain → Apply → Check.",
+   "slides": [
+    {
+     "id": "T00-01",
+     "title": "The final exam at a glance",
+     "kind": "compare",
+     "body": [
+      "15 questions · 30 points · 30% of the course grade. Closed book, no AI tools.",
+      "Covers the whole course, Weeks 1–10: lectures, AI in Action Studios and problem sets.",
+      "No quiz question came from Week 6 or Week 10, but the final covers both: read the Week 6 lecture (an agent that works while you do not) and the Week 10 lecture (the harness) with the same care.",
+      "Thu 12 Nov 2026, 1 pm (Week 11). Please check the date, time and venue on eLearn."
+     ],
+     "table": {
+      "headers": [
+       "",
+       "Part A: multiple choice",
+       "Part B: concept definition and problem solving"
+      ],
+      "rows": [
+       [
+        "Questions",
+        "10",
+        "5"
+       ],
+       [
+        "Points",
+        "1 each = 10",
+        "4 each = 20; parts (a)–(d), 1 point each"
+       ],
+       [
+        "Form",
+        "a short business case + 4 options, one right (written like the 40 quiz questions)",
+        "define a course concept in your own words, then use it on a short business problem: read a table, place a task or product on a map, name the state two teams are in, choose a setting, or say what a person should check before an agent acts"
+       ]
+      ]
+     },
+     "memorise": "10 × 1 + 5 × 4 = 30 points. Part B is two-thirds of the marks.",
+     "tip": "Practise Part A with the 40 quiz questions (answers covered, then read why each option is right or wrong). Practise Part B by writing the five practice answers by hand.",
+     "source": "Source: Prof Roh's Comprehensive Course Revision Pack (5 Nov 2026), p.3"
+    },
+    {
+     "id": "T00-02",
+     "title": "Part B: the 4-point answer",
+     "kind": "compare",
+     "body": [
+      "Parts (a) to (d) of every Part B question follow these four steps, in this order.",
+      "'An answer that only defines the term earns one point, however well it is written. Part B rewards the step from the idea to the decision.' (p.4)",
+      "'The case is where most of the points sit.' (p.146)"
+     ],
+     "table": {
+      "headers": [
+       "Point",
+       "Step",
+       "What a full answer does"
+      ],
+      "rows": [
+       [
+        "(a) 1",
+        "Define it",
+        "State the concept in our course's terms, in one or two sentences, and name its parts if it has any."
+       ],
+       [
+        "(b) 1",
+        "Explain how it works",
+        "Say what happens inside it, or why it matters, with the mechanism we studied: the spread of next tokens, the judge built from rankings, the trigger, the gate."
+       ],
+       [
+        "(c) 1",
+        "Apply it to the case",
+        "Compute the rate, place the task, name the state or choose the setting, and show the step that gets you there."
+       ],
+       [
+        "(d) 1",
+        "Say what to check or do next",
+        "What a person should check or do before relying on the result, and why: the source to open, the gate to set, the evidence that would change the decision."
+       ]
+      ]
+     },
+     "memorise": "Define → Explain → Apply → Check. One point each.",
+     "trap": "Defining well and stopping = 1 point of 4."
+    },
+    {
+     "id": "T00-03",
+     "title": "Worked example: temperature (Quiz 1, Question 5)",
+     "kind": "example",
+     "body": [
+      "Question: Define temperature. A bank runs the same model for two jobs: rewriting approved disclosure text, which must read the same on every run, and drafting campaign taglines, where sameness is the problem. How should it set temperature for each job, and what should a person still check?",
+      "Define: temperature controls how the model picks from its spread of candidate next tokens: at 0 it takes the top token every time, and higher values flatten the spread, so less likely tokens are picked more often.",
+      "Explain: it changes the picking and leaves what the model learned untouched, so the same prompt gives varied text at a higher temperature.",
+      "Apply: set it at or near 0 for the disclosure text, so the wording repeats, and raise it moderately for the taglines.",
+      "Check: a person still compares the disclosure with the approved text, because a low temperature makes output repeatable rather than correct, and reviews each tagline before use."
+     ],
+     "trap": "Low temperature makes output repeatable, not correct.",
+     "tip": "Use the four step words as your own labels: write 'Define.', 'Explain.', 'Apply.', 'Check.' at the start of each part."
+    },
+    {
+     "id": "T00-04",
+     "title": "Where Part B answers lose points",
+     "kind": "compare",
+     "body": [
+      "'Write in full sentences, and show your working where there is a number or a placement. A short answer that does all four parts earns more than a long one that only defines.' (p.152)"
+     ],
+     "table": {
+      "headers": [
+       "What the answer did",
+       "Why it loses a point",
+       "What to write instead"
+      ],
+      "rows": [
+       [
+        "defined the term and stopped",
+        "the definition earns one point of the four",
+        "use it on the case, and say what a person checks"
+       ],
+       [
+        "said 'the model knows' or 'the AI decided'",
+        "it describes a person, and hides what the system did",
+        "say what it did: predicted the next token, called a tool, returned a score"
+       ],
+       [
+        "read one cell of a table",
+        "a single cell cannot show an association",
+        "compute the rate in each row and compare them"
+       ],
+       [
+        "placed a product by its name",
+        "the map reads settings, and the same product moves when a setting changes",
+        "answer Q1 (Who starts a run?) and Q3 (What can it touch?) from its settings"
+       ],
+       [
+        "put the gate in the prompt",
+        "a sentence in the prompt cannot hold a call",
+        "put the gate in the settings: drafts only, a narrower key, an approval before the action"
+       ],
+       [
+        "named no check",
+        "the fourth point is the person's step",
+        "say what a person opens, compares or approves, and when"
+       ]
+      ]
+     },
+     "memorise": "No 'AI decided'. Rates per row. Settings, not names. Gate in settings, not prompt. Always name the check."
+    },
+    {
+     "id": "T00-05",
+     "title": "How to revise in the days before the exam",
+     "kind": "list",
+     "body": [
+      "1. Test yourself on the quizzes: go through the four quiz sections with answers covered; commit to an option before opening each answer; note the questions you missed.",
+      "2. Go back to the source: for each missed question, read its concept slide, then open one source listed under 'Where we met it' and read the slide or page itself.",
+      "3. Write Part B by hand: the five practice answers on paper, about ten minutes each, marked against the four parts: define, explain, apply, check.",
+      "4. Read one agent's record: rerun one agent from this term, read its record top to bottom, and place it on the map with Q1 to Q6."
+     ],
+     "tip": "The quiz app has all of this: 'Prof Roh's 40 quiz questions', 'Part B practice' (mark each part 0 or 1) and a Mock final (Part A 10 × 1 + Part B 5 × 4).",
+     "source": "Source: Prof Roh's Comprehensive Course Revision Pack (5 Nov 2026), p.153"
+    },
+    {
+     "id": "T00-06",
+     "title": "What the exam tests (and what it does not)",
+     "kind": "memorise",
+     "memorise": "'Facts about products change every week, such as plans, prices and the countries a product reaches, and they are not what the exam tests. The exam tests whether you can read a model, a table, a task or an agent with the ideas of our course, and say what a person should do next.' (p.153)",
+     "body": [
+      "Read a model: next tokens, temperature, the judge built from rankings, rewards we can check.",
+      "Read a table: the rate in each row, never one cell or the diagonal; association is not cause.",
+      "Read a task: the Week 7 map (Does it have a right answer? Must people and AI do it together, or can either do it alone?).",
+      "Read an agent: the Week 9 map from its settings, Q1 (Who starts a run?) and Q3 (What can it touch?): Ask / Delegate / Monitor / Autopilot; the harness and where its gate sits.",
+      "Then say what a person should do next: open the source, set the gate, compare with a control total, show both teams the actual answers."
+     ]
+    }
+   ]
+  },
   {
    "id": "T01",
    "title": "From Predictive to Generative AI",
@@ -3188,15 +3364,15 @@
    "slides": [
     {
      "id": "T16-01",
-     "title": "The two assessments",
+     "title": "The final exam at a glance",
      "kind": "concept",
      "body": [
-      "The final covers the whole course; Weeks 9-10 (T13, T14, T17-T19) are the newest and most detailed material.",
-      "Final: Thu 12 Nov 2026, 1 pm, 2 hours, closed book, no AI, MCQ + short scenario questions, 30%.",
-      "Date check: the PS8 brief calls Tue 10 Nov 'the night before our final exam'. Confirm the date on eLearn.",
-      "Syllabus scope: 'mental models of modern AI, communicating with AI, workflow and agent design, trust and oversight, responsible use, and tool-selection judgment'.",
-      "The specimen paper (Week 9) is not in the project files: upload it from eLearn if you have it.",
-      "Closest model of his style: the Week 9 checkpoint (three scenario MCQs, each with 'why' and 'revisit slide X') and the PS6 E/F/G slider cases."
+      "The final covers Weeks 1–10: lectures, AI in Action Studios and problem sets (see T00 for full marking).",
+      "Part A: 10 MCQs × 1 point, each a short business case with 4 options — written like the 40 quiz questions.",
+      "Part B: 5 questions × 4 points, parts (a) Define → (b) Explain → (c) Apply → (d) Check.",
+      "Date check: the PS8 brief calls Tue 10 Nov 'the night before our final exam'. Confirm date and venue on eLearn.",
+      "Best practice material: Prof Roh's 40 quiz questions and his 5 Part B practice questions (in the Quiz app).",
+      "'Facts about products change every week … they are not what the exam tests.'"
      ],
      "image": "img/T16-exam-strategy.svg"
     },

@@ -134,6 +134,7 @@ export default function Slide({ slide, topic, notesAside = false }) {
 
       {!notesAside && slide.tip && <div className="callout tip"><Bulb /><div><b>Exam tip</b> {slide.tip}</div></div>}
       {!notesAside && slide.trap && <div className="callout trap"><Alert /><div><b>Trap</b> {slide.trap}</div></div>}
+      {slide.source && <p className="slide-source">{slide.source}</p>}
     </article>
   );
 }
