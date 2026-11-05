@@ -36,6 +36,7 @@ export function ImportantGallery({ content, store, navigate }) {
             return (
               <section key={g.id} className="imp-group">
                 <h2>{g.title} {g.week && <span className="muted">· {g.week}</span>}</h2>
+                {g.notice && <p className="imp-notice" data-testid="imp-notice" role="note">{g.notice}</p>}
                 <ul className="imp-grid">
                   {list.map(({ s, i }) => (
                     <li key={s.id}>
@@ -107,7 +108,7 @@ export function ImportantViewer({ content, groupId, index, store, actions, navig
       <header className="viewer-bar">
         <button className="icon-btn" onClick={close} aria-label="Close"><Close /></button>
         <div className="viewer-title">
-          <div className="topic-bar-id">{g.title}{s.topic ? ` · ${s.topic}` : ''}</div>
+          <div className="topic-bar-id">{g.title}{s.topic ? ` · ${s.topic}` : ''}{g.notice ? ' · class use only' : ''}</div>
           <div className="topic-bar-title">{s.title}</div>
         </div>
         <span className="viewer-count">{at + 1}/{flat.length}</span>

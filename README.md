@@ -8,6 +8,15 @@ A phone-and-laptop revision app for MGMT6110 Human-AI Collaboration. **Final exa
 - Installable PWA (works offline after the first visit). Light/dark theme. Font size S/M/L/XL.
 - Keyboard: `←` `→` move slides, `B` bookmark, `M` mastered, `Esc` back to Home. On the phone: swipe, or tap the left/right edge of the slide.
 
+> **Share the deployed app only within the class.** The *Prof Roh's revision pack — key pages* gallery shows pages of Prof Roh's Comprehensive Course Revision Pack, which says *"For MGMT 6110 in the MBAI programme use only. Do not circulate without the author's permission."* Keep the Vercel URL inside the MGMT6110 class (do not post it publicly); the gallery header repeats this notice.
+
+## What changed in v3 (5 Nov 2026)
+
+- **New first topic T00 "The final exam: how it is marked"** (colour #111827, 6 slides): the format (Part A 10 × 1, Part B 5 × 4), the 4-point rubric Define → Explain → Apply → Check with the temperature worked example (Quiz 1 Q5), where Part B answers lose points (pack p.152), how to revise (p.153), and "facts about products change every week … not what the exam tests". Edited in the shared source `/home/claude/mgmt6110/build/content/slides.json`, then synced (`npm run sync-content`). Slides may now carry an optional `source` line.
+- **Important slides: new first group "Prof Roh's revision pack — key pages"** (16 pages: p.3 exam format, p.4 the 4-point answer, p.152 where points are lost, p.153 how to revise, p.6 course on one page, p.7 where the 40 questions came from, p.25/46/64/101 the four quiz "in a nutshell" tables, p.98 the harness (Quiz 4 Q8), p.114/132 studio nutshells, p.141 the Week 9 map with Muse / Zap / Run 4a-4b, p.143 co-collaboration principle, p.144 the five states). Images `public/content/important/pack-pNNN.jpg` (rendered at 150 dpi, 1800 px wide, < 450 KB), each with a title, 3–5 "Remember" bullets and a topic id. A group may carry a `notice`, shown under its heading (here: *"From Prof Roh's revision pack — for MGMT6110 class use only; do not circulate"*).
+- **Progress is NOT reset** (only the quiz app starts fresh in v3). Service worker `VERSION` → `mgmt6110-v5-2026-11-05-pack`.
+- Tests: `scripts/test-v3.cjs` (T00, pack group + notice, images, fold sizes, progress kept) and `scripts/test-v2.cjs` still pass. Run `npx vite preview --port 4312 --strictPort &` then `PORT=4312 timeout 300 node scripts/test-v3.cjs`.
+
 ## What changed in v2 (4 Nov 2026)
 
 **Progress is safer**
@@ -147,6 +156,7 @@ The **Important** tab (and the Home card) reads `public/content/important.json`:
   "groups": [
     {
       "id": "week9", "title": "Week 9 · Mapping the Territory", "week": "Week 9",
+      "notice": "optional line shown under the heading (e.g. a class-use-only notice)",
       "slides": [
         {
           "id": "six-questions",

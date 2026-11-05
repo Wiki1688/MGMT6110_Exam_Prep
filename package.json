@@ -1,13 +1,14 @@
 {
   "name": "mgmt6110-exam-prep",
   "private": true,
-  "version": "1.0.0",
+  "version": "3.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 4173",
-    "sync-content": "bash scripts/sync-content.sh"
+    "sync-content": "bash scripts/sync-content.sh",
+    "test": "PORT=4312 node scripts/test-v3.cjs"
   },
   "dependencies": {
     "react": "^18.3.1",

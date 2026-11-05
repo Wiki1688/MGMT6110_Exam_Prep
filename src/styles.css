@@ -55,7 +55,7 @@ html { font-size: var(--base); -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--bg); color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.5; overscroll-behavior-y: none;
+  line-height: 1.5;
 }
 button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 button:disabled { opacity: .4; cursor: default; }
@@ -342,7 +342,9 @@ main { flex: 1; }
 
 /* ======================= v2 (Nov 2026) ======================= */
 :root { --sal: env(safe-area-inset-left, 0px); --sar: env(safe-area-inset-right, 0px); }
-html, body { overflow-x: hidden; }
+/* Never make <body> a scroll box: overflow-x hidden on html+body traps touch scrolling on phones.
+   'clip' hides sideways overflow without creating a scroll container. */
+body { overflow-x: clip; }
 .app { min-height: 100vh; min-height: 100dvh; }
 .page { padding-left: calc(var(--gutter) + var(--sal)); padding-right: calc(var(--gutter) + var(--sar)); }
 .chip.final.exam-day em { background: #DC2626; }
@@ -475,3 +477,7 @@ html, body { overflow-x: hidden; }
 }
 .chip em { white-space: nowrap; flex: none; }
 .chip .chip-main { min-width: 0; }
+.slide-source { margin-top: 12px; font-size: 0.85rem; color: var(--muted, #667); }
+.imp-notice { margin: -4px 0 10px; padding: 6px 10px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .imp-notice { background: #3a2e0a; color: #fcd34d; } }
+:root[data-theme='dark'] .imp-notice { background: #3a2e0a; color: #fcd34d; }
